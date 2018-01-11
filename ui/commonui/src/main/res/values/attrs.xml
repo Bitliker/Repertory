@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="HorizontalStepsView">
+        <!--是否可以左右滑动，当视图宽度大于可视范围 默认可以点击-->
+        <attr name="slide_able" format="boolean" />
+        <!--是否可以点击步骤按钮 默认为可以点击-->
+        <attr name="click_able" format="boolean" />
+        <!--每个步骤所占宽度-->
+        <attr name="item_width" format="dimension" />
+        <!--步骤的点的绘制半径-->
+        <attr name="step_radius" format="dimension" />
+        <!--线条的大小-->
+        <attr name="line_size" format="dimension" />
+        <!--已经走过了的步骤颜色-->
+        <attr name="finish_color" format="color" />
+        <!--没有走过的步骤颜色-->
+        <attr name="unfinish_color" format="color" />
+        <!--提示信息的字体大小-->
+        <attr name="text_size" format="dimension" />
+    </declare-styleable>
+</resources>

@@ -1,0 +1,36 @@
+apply plugin: rootProject.ext.plugin.lib
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main.jniLibs.srcDirs = ['libs']
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation rootProject.ext.expand.supportV7
+    implementation rootProject.ext.expandMe.SwipebackLayout
+}
+
+
+def repertoyAllName = 'com.gxut.core'   ////最终引用形式，如compile 'com.gxut.ui.baseurl:1.0.0'，中的com.gxut.ui部分
+def versionCode = '1.0'                 // 发布版本号
+def versionName = 'v1.0'                // 发布版本名字
+def repertoyName = 'core'               //仓库名称
+def projectName = 'BaseUtil'             //项目名称
+def organizationName = 'gxut'           //组织名称
+def desction = '作为一个通用的基本依赖库，有基本的工具类和Activity、Application、Fragment等'                 //备注

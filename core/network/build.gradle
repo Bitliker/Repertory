@@ -1,0 +1,36 @@
+apply plugin: rootProject.ext.plugin.lib
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation rootProject.ext.expand.supportV7
+    implementation rootProject.ext.expand.recyclerview
+    implementation rootProject.ext.expand.okhttp3
+    implementation rootProject.ext.expand.rxjava2
+    implementation rootProject.ext.expand.rxandroid
+}
+
+def repertoyAllName = 'com.gxut.core'   ////最终引用形式，如compile 'com.leon.lfilepicker:1.0.0'，其中lfilepicker在后面配置
+def versionCode = '1.0'                 // 发布版本号
+def versionName = 'v1.0'                // 发布版本名字
+def repertoyName = 'core'               //仓库名称
+def projectName = 'NetWork'             //项目名称
+def organizationName = 'gxut'           //组织名称
+def desction = '对okhttp的封装'                 //备注

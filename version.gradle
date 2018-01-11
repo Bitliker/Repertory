@@ -31,7 +31,12 @@ ext {
             okhttp3     : 'com.squareup.okhttp3:okhttp:3.8.0',
             fastjson    : 'com.alibaba:fastjson:1.2.44',
             rxjava2     : 'io.reactivex.rxjava2:rxjava:2.1.0',
-            rxandroid     : 'io.reactivex.rxjava2:rxandroid:2.0.1',
+            rxandroid   : 'io.reactivex.rxjava2:rxandroid:2.0.1',
             constraint  : 'com.android.support.constraint:constraint-layout:1.0.2',
+    ]
+    expandMe = [
+            SwipebackLayout: 'com.gxut.ui:swipebacklayout:v1.0',
+            CommonUi       : 'com.gxut.ui:commonui:v0.8.0',
+            RefreshLayout  : 'com.gxut.ui:refreshlayout:v0.8.0'
     ]
 }

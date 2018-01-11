@@ -1,1 +1,14 @@
 include ':simple'
+//ui
+include ':swipebacklayout'
+include ':commonui'
+include ':refreshlayout'
+//核心工具
+include ':network'
+include ':baseutil'
+
+project(':swipebacklayout').projectDir = new File('ui/swipebacklayout')
+project(':refreshlayout').projectDir = new File('ui/refreshlayout')
+project(':commonui').projectDir = new File('ui/commonui')
+project(':network').projectDir = new File('core/network')
+project(':baseutil').projectDir = new File('core/baseutil')

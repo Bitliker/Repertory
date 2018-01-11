@@ -1,12 +1,15 @@
 package com.gxut.simple
 
-import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
+import com.gxut.baseutil.base.BaseToolBarActivity
 
-class IndexActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_index)
+class IndexActivity : BaseToolBarActivity() {
+    override fun initLayout(): Int {
+        return R.layout.activity_index
     }
+
+    override fun init() {
+        showProgress(false)
+    }
+
+
 }

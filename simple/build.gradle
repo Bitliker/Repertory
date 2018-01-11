@@ -1,17 +1,15 @@
-apply plugin: 'com.android.application'
-
-apply plugin: 'kotlin-android'
-
-apply plugin: 'kotlin-android-extensions'
+apply plugin: rootProject.ext.plugin.app
+apply plugin: rootProject.ext.plugin.kotlin
+apply plugin: rootProject.ext.plugin.kotlinExt
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
     defaultConfig {
-        applicationId "com.gxut.simple"
-        minSdkVersion 25
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        applicationId rootProject.ext.android.id
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -20,14 +18,31 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main.jniLibs.srcDirs = ['libs']
+    }
+    packagingOptions{
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation rootProject.ext.expand.kotlin
+    implementation rootProject.ext.expand.supportV7
+    implementation rootProject.ext.expand.design
+    implementation rootProject.ext.expand.constraint
+    implementation rootProject.ext.expand.okhttp3
+    implementation rootProject.ext.expand.rxjava2
+    implementation rootProject.ext.expand.rxandroid
+    implementation project(':swipebacklayout')
+    implementation project(':network')
+    implementation project(':commonui')
+    implementation project(':baseutil')
+    compile ('cn.leancloud.android:avoscloud-sdk:v4.6.1')
 }
+

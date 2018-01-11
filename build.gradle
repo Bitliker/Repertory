@@ -20,6 +20,8 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven { url "https://dl.bintray.com/gxut/ui" }
+        maven { url "http://mvn.leancloud.cn/nexus/content/repositories/public" }
     }
 }
 
