@@ -1,0 +1,37 @@
+ext {
+    repositories = [
+            bmobBaseUrl: "https://raw.github.com/bmob/bmob-android-sdk/master"
+    ]
+    plugin = [
+            kotlin   : 'kotlin-android',
+            kotlinExt: 'kotlin-android-extensions',
+            app      : 'com.android.application',
+            lib      : 'com.android.library',
+            maven    : 'com.github.dcendents.android-maven',
+            bintray  : 'com.jfrog.bintray'
+    ]
+    android = [
+            id               : 'com.gxut.simple',
+            compileSdkVersion: 26,
+            buildToolsVersion: '27.0.0',
+            minSdkVersion    : 21,
+            targetSdkVersion : 26,
+            javaVersion      : JavaVersion.VERSION_1_8,
+            versionCode      : 1,
+            versionName      : 'v1.0',
+    ]
+
+    expand = [
+            kotlin      : "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version",
+            supportV7   : 'com.android.support:appcompat-v7:26.1.0',
+            recyclerview: 'com.android.support:recyclerview-v7:26.1.0',
+            bmob        : 'cn.bmob.android:bmob-sdk:3.5.8',
+            design      : 'com.android.support:design:26.1.0',
+            nohttp      : 'com.yanzhenjie.nohttp:okhttp:1.1.5',
+            okhttp3     : 'com.squareup.okhttp3:okhttp:3.8.0',
+            fastjson    : 'com.alibaba:fastjson:1.2.44',
+            rxjava2     : 'io.reactivex.rxjava2:rxjava:2.1.0',
+            rxandroid     : 'io.reactivex.rxjava2:rxandroid:2.0.1',
+            constraint  : 'com.android.support.constraint:constraint-layout:1.0.2',
+    ]
+}
