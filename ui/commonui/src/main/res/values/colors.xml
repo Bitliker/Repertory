@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="itemNormal">#FAF9F9</color>
+    <color name="itemPress">#DFDEDE</color>
+    <color name="textColorHine">#787878</color>
+    <color name="textColorNormal">#808A87</color>
+</resources>

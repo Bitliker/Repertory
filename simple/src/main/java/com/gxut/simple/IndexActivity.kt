@@ -1,6 +1,8 @@
 package com.gxut.simple
 
+import android.content.Intent
 import com.gxut.baseutil.base.BaseToolBarActivity
+import com.gxut.simple.ui.activity.CommonUiActivity
 
 class IndexActivity : BaseToolBarActivity() {
     override fun initLayout(): Int {
@@ -8,8 +10,11 @@ class IndexActivity : BaseToolBarActivity() {
     }
 
     override fun init() {
-        showProgress(false)
+        startActivity(Intent(ct, CommonUiActivity::class.java))
+        finish()
     }
 
-
+    override fun needNavigation(): Boolean {
+        return false
+    }
 }
