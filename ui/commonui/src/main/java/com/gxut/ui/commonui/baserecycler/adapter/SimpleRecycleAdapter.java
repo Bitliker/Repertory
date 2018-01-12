@@ -68,7 +68,7 @@ public class SimpleRecycleAdapter<T> extends RecycleAdapter<SimpleModel<T>, Simp
     }
 
     @Override
-    public void bindData(SimpleRecycleAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(SimpleRecycleAdapter.ViewHolder holder, int position) {
         SimpleModel model = getModel(position);
         if (model != null) {
             holder.nameTv.setText(model.getName());
@@ -86,7 +86,6 @@ public class SimpleRecycleAdapter<T> extends RecycleAdapter<SimpleModel<T>, Simp
 
     @Override
     protected void itemClick(SimpleModel<T> model, int position) {
-        super.itemClick(model, position);
         if (showCb || isMulti) {//显示选择框
             if (isMulti) {//多选
                 showCbMulti(position);

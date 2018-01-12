@@ -44,12 +44,12 @@
 	<dependency>
 		<groupId>com.gxut.core</groupId>
 		<artifactId>baseutil</artifactId>
-		<version>v1.0</version>
+		<version>v1.0.1</version>
 		<type>pom</type>
 	</dependency>
 
 ####  gradle引用方式
-	compile 'com.gxut.core:baseutil:v1.0'
+	compile 'com.gxut.core:baseutil:v1.0.1'
 
 ----------
 
@@ -87,12 +87,12 @@
 	<dependency>
 		<groupId>com.gxut.ui</groupId>
 		<artifactId>commonui</artifactId>
-		<version>v0.8.0</version>
+		<version>v1.0.0</version>
 		<type>pom</type>
 	</dependency>
 
 ####  gradle引用方式
-	compile 'com.gxut.ui:commonui:v0.8.0'
+	compile 'com.gxut.ui:commonui:v1.0.0'
 
 ----------
 

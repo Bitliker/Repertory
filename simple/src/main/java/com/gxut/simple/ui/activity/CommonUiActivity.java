@@ -44,8 +44,8 @@ public class CommonUiActivity extends BaseToolBarActivity {
         mAdapter.setOnItemClickListener(new RecycleAdapter.OnItemClickListener<SimpleModel>() {
             @Override
             public void itemClick(SimpleModel model, int position) {
-                LogUtil.i(JSONUtil.toJSONString(model));
-                LogUtil.i("position=" + position);
+                LogUtil.i("gongpengming",JSONUtil.toJSONString(model));
+                LogUtil.i("gongpengming","position=" + position);
             }
         });
         mAdapter.setMulti(true);
@@ -69,7 +69,7 @@ public class CommonUiActivity extends BaseToolBarActivity {
             }
         });
         mRecyclerView.addItemDecoration(new GridDecoration());
-        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, LinearLayout.HORIZONTAL));
+        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, LinearLayout.VERTICAL));
         mRecyclerView.setAdapter(mAdapter);
 
     }
