@@ -44,12 +44,12 @@
 	<dependency>
 		<groupId>com.gxut.core</groupId>
 		<artifactId>baseutil</artifactId>
-		<version>v1.0.1</version>
+		<version>v1.0.2</version>
 		<type>pom</type>
 	</dependency>
 
 ####  gradle引用方式
-	compile 'com.gxut.core:baseutil:v1.0.1'
+	compile 'com.gxut.core:baseutil:v1.0.2'
 
 
 
