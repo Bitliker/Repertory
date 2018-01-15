@@ -51,8 +51,13 @@
 ####  gradle引用方式
 	compile 'com.gxut.core:baseutil:v1.0.1'
 
-----------
 
+
+#### updata v1.0.2
+>添加DisplayUtil设置全屏和KeybordUtil键盘控制工具和RegexUtil正则的基本格式和运算工具
+
+
+----------
 
 ### network
 ####  maven引用方式
