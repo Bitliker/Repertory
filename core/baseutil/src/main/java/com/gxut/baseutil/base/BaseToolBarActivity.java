@@ -104,6 +104,7 @@ public abstract class BaseToolBarActivity extends SwipeBackActivity {
         if (needNavigation()) {
             setNavigation(0, null);
         }
+        commonTitleTv.setText(getTitle());
     }
 
 
