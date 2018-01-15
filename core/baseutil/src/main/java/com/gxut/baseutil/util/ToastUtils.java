@@ -31,7 +31,7 @@ public final class ToastUtils {
     }
 
 
-    private void init(Context context) {
+    public static void init(Context context) {
         ToastUtils.context = context;
     }
 
