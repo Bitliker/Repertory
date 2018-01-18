@@ -21,14 +21,12 @@ import java.lang.annotation.RetentionPolicy;
 
 public abstract class BaseActionBarActivity extends SwipeBackActivity {
     protected BaseActionBarActivity ct;
-    protected LoadProgress mProgress;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         preCreate();
         super.onCreate(savedInstanceState);
         ct = this;
-        mProgress = LoadProgress.newInstance(getFragmentManager(), getProgressView());
 
         View view = initLayoutView();
         if (view != null) {
@@ -82,15 +80,17 @@ public abstract class BaseActionBarActivity extends SwipeBackActivity {
     protected ProgressView getProgressView() {
         return new SimpleProgressView(ct);
     }
+
     /*设置标题*/
     public final void setTitle(CharSequence title) {
         getSupportActionBar().setTitle(title);
     }
 
+    protected LoadProgress mProgress;
+
     protected final void showProgress(boolean canCancel, String message) {
-        if (mProgress != null) {
-            mProgress.show(canCancel, message);
-        }
+        mProgress = LoadProgress.newInstance(getProgressView());
+        mProgress.show(getFragmentManager(), canCancel, message);
     }
 
     protected final void showProgress(boolean canCancel) {

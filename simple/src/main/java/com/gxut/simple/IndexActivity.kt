@@ -2,7 +2,7 @@ package com.gxut.simple
 
 import android.content.Intent
 import com.gxut.baseutil.base.BaseToolBarActivity
-import com.gxut.simple.ui.activity.CommonUiActivity
+import com.gxut.simple.ui.activity.TestBaseActivity
 
 class IndexActivity : BaseToolBarActivity() {
     override fun initLayout(): Int {
@@ -10,7 +10,7 @@ class IndexActivity : BaseToolBarActivity() {
     }
 
     override fun init() {
-        startActivity(Intent(ct, CommonUiActivity::class.java))
+        startActivity(Intent(ct, TestBaseActivity::class.java))
         finish()
     }
 

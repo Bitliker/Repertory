@@ -33,14 +33,12 @@ public abstract class BaseToolBarActivity extends SwipeBackActivity {
     private Toolbar commonToolBar;
     private TextView commonTitleTv;
     private RelativeLayout contentRl;
-    protected LoadProgress mProgress;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         preCreate();
         super.onCreate(savedInstanceState);
         ct = this;
-        mProgress = LoadProgress.newInstance(getFragmentManager(), getProgressView());
 
         super.setContentView(R.layout.base_bar_layout);
         contentRl = findViewById(R.id.contentRl);
@@ -55,7 +53,6 @@ public abstract class BaseToolBarActivity extends SwipeBackActivity {
         }
         getSwipeBackLayout().setEdgeTrackingEnabled(getSwipeMode());
     }
-
 
 
     @Override
@@ -124,6 +121,7 @@ public abstract class BaseToolBarActivity extends SwipeBackActivity {
     protected ProgressView getProgressView() {
         return new SimpleProgressView(ct);
     }
+
     /*设置自定义的toolbar*/
     protected final void setToolBar(int toolBarId) {
         hidetoolBar();
@@ -178,10 +176,11 @@ public abstract class BaseToolBarActivity extends SwipeBackActivity {
         commonToolBar.setNavigationOnClickListener(onClickListener);
     }
 
+    protected LoadProgress mProgress;
+
     protected final void showProgress(boolean canCancel, String message) {
-        if (mProgress != null) {
-            mProgress.show(canCancel, message);
-        }
+        mProgress = LoadProgress.newInstance(getProgressView());
+        mProgress.show(getFragmentManager(),canCancel, message);
     }
 
     protected final void showProgress(boolean canCancel) {

@@ -20,7 +20,7 @@ public final class ToastUtils {
     private static Toast sToast;
     private static int gravity = Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM;
     private static int xOffset = 0;
-    private static int yOffset = 0;
+    private static int yOffset = 100;
     private static View customView;
     private static Handler sHandler = new Handler(Looper.getMainLooper());
     private static Context context;

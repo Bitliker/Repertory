@@ -28,8 +28,8 @@ dependencies {
 
 
 def repertoyAllName = 'com.gxut.core'   ////最终引用形式，如compile 'com.gxut.ui.baseurl:1.0.0'，中的com.gxut.ui部分
-def versionCode = '1.0.4'                 // 发布版本号
-def versionName = 'v1.0.4'                // 发布版本名字
+def versionCode = '1.0.5'                 // 发布版本号
+def versionName = 'v1.0.5'                // 发布版本名字
 def repertoyName = 'core'               //仓库名称
 def projectName = 'BaseUtil'             //项目名称
 def organizationName = 'gxut'           //组织名称
