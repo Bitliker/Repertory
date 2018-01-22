@@ -2,15 +2,17 @@ package com.gxut.simple.ui.activity;
 
 import android.view.View;
 
-import com.gxut.baseutil.base.BaseToolBarActivity;
+import com.gxut.baseutil.util.LogUtil;
 import com.gxut.baseutil.util.ToastUtils;
 import com.gxut.simple.R;
+import com.gxut.ui.facedialog.FaceDialogBuilder;
+import com.gxut.ui.facedialog.common.Param;
 
 /**
  * Created by Bitlike on 2018/1/18.
  */
 
-public class TestBaseActivity extends BaseToolBarActivity {
+public class TestBaseActivity extends BaseActivity {
     @Override
     protected int initLayout() {
         return R.layout.activity_testbase;
@@ -22,16 +24,30 @@ public class TestBaseActivity extends BaseToolBarActivity {
         findViewById(R.id.testBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                new FaceDialogBuilder(ct)
+                        .setTitle("标题")
+                        .setContent("内容")
+                        .setPromptConfig(new Param.OnPromptConfig() {
+                            @Override
+                            public void config(Param.PromptParam param) {
+                                param.cancelable = false;
+                                param.canceledOnTouchOutside = false;
+                                param.animationsIds=R.anim.anim_simple_b_t;
+                            }
+                        })
+                        .setSureOnclickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                LogUtil.i("setSureOnclickListener");
+                            }
+                        })
+                        .setCancelOnclickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                LogUtil.i("setCancelOnclickListener");
+                            }
+                        }).show();
 
-                ToastUtils.showShort("这个是个提示");
-//                showProgress();
-//                new Handler().postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        dismissProgress();
-//                    }
-//                }, 1000);
-//
             }
         });
     }

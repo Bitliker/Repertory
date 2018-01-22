@@ -3,6 +3,7 @@ include ':simple'
 include ':swipebacklayout'
 include ':commonui'
 include ':refreshlayout'
+include  ':facedialog'
 //核心工具
 include ':network'
 include ':baseutil'
@@ -10,5 +11,6 @@ include ':baseutil'
 project(':swipebacklayout').projectDir = new File('ui/swipebacklayout')
 project(':refreshlayout').projectDir = new File('ui/refreshlayout')
 project(':commonui').projectDir = new File('ui/commonui')
+project(':facedialog').projectDir = new File('ui/facedialog')
 project(':network').projectDir = new File('core/network')
 project(':baseutil').projectDir = new File('core/baseutil')

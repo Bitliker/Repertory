@@ -2,7 +2,7 @@
 <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:id="@+id/commonToolBar"
-    android:background="@color/colorPrimary"
+    android:background="?attr/colorPrimary"
     android:layout_height="?attr/actionBarSize">
 
     <TextView
@@ -11,6 +11,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textStyle="bold"
-        android:textColor="@color/textColorPrimary"
+        android:textColor="?android:attr/textColorPrimary"
         android:textSize="18sp" />
 </android.support.v7.widget.Toolbar>

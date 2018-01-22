@@ -15,9 +15,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gxut.baseutil.R;
-import com.gxut.baseutil.widget.progress.LoadProgress;
-import com.gxut.baseutil.widget.progress.ProgressView;
-import com.gxut.baseutil.widget.progress.SimpleProgressView;
 import com.gxut.ui.swipebacklayout.SwipeBackActivity;
 import com.gxut.ui.swipebacklayout.layout.SwipeBackLayout;
 
@@ -39,7 +36,6 @@ public abstract class BaseToolBarActivity extends SwipeBackActivity {
         preCreate();
         super.onCreate(savedInstanceState);
         ct = this;
-
         super.setContentView(R.layout.base_bar_layout);
         contentRl = findViewById(R.id.contentRl);
         if (needCommonToolBar()) {
@@ -118,9 +114,7 @@ public abstract class BaseToolBarActivity extends SwipeBackActivity {
         getSwipeBackLayout().setScreenScllor(enable);
     }
 
-    protected ProgressView getProgressView() {
-        return new SimpleProgressView(ct);
-    }
+
 
     /*设置自定义的toolbar*/
     protected final void setToolBar(int toolBarId) {
@@ -176,26 +170,6 @@ public abstract class BaseToolBarActivity extends SwipeBackActivity {
         commonToolBar.setNavigationOnClickListener(onClickListener);
     }
 
-    protected LoadProgress mProgress;
-
-    protected final void showProgress(boolean canCancel, String message) {
-        mProgress = LoadProgress.newInstance(getProgressView());
-        mProgress.show(getFragmentManager(),canCancel, message);
-    }
-
-    protected final void showProgress(boolean canCancel) {
-        showProgress(canCancel, null);
-    }
-
-    protected final void showProgress() {
-        showProgress(true, null);
-    }
-
-    protected final void dismissProgress() {
-        if (mProgress != null) {
-            mProgress.dismiss();
-        }
-    }
 
     /*初始化界面，在super.onCreate 之前*/
     protected void preCreate() {

@@ -43,6 +43,6 @@ dependencies {
     implementation project(':network')
     implementation project(':commonui')
     implementation project(':baseutil')
-    compile ('cn.leancloud.android:avoscloud-sdk:v4.6.1')
+    implementation project(':facedialog')
 }
 

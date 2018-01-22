@@ -1,4 +1,4 @@
-package com.gxut.baseutil.widget.progress;
+package com.gxut.ui.facedialog.progress;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -10,7 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.gxut.baseutil.R;
+import com.gxut.ui.facedialog.R;
+import com.gxut.ui.facedialog.common.Param;
 
 
 /**
@@ -22,6 +23,7 @@ public class LoadProgress extends DialogFragment {
     private static final String KEY_SHOW_MESSAGE = "KEY_SHOW_MESSAGE";
     private static final String TAG = "LoadProgress";
 
+    private Param.LoadParam mLoadParam;
     private ProgressView mProgressView;
 
     @SuppressLint("ValidFragment")
@@ -29,17 +31,13 @@ public class LoadProgress extends DialogFragment {
     }
 
 
-    public static LoadProgress newInstance( ProgressView mProgressView) {
-        Bundle args = new Bundle();
+    public static LoadProgress newInstance() {
         LoadProgress fragment = new LoadProgress();
-        fragment.setArguments(args);
-        fragment.setProgressView(mProgressView);
         return fragment;
     }
 
-
-    private void setProgressView(ProgressView mProgressView) {
-        this.mProgressView = mProgressView;
+    public void setLoadParam(Param.LoadParam mLoadParam) {
+        this.mLoadParam = mLoadParam;
     }
 
 
@@ -47,6 +45,12 @@ public class LoadProgress extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+
+        if (this.mLoadParam == null || this.mLoadParam.mProgressView == null) {
+            this.mProgressView = new SimpleProgressView(getActivity());
+        } else {
+            this.mProgressView = this.mLoadParam.mProgressView;
+        }
         return this.mProgressView;
     }
 
@@ -69,16 +73,15 @@ public class LoadProgress extends DialogFragment {
     private void initView() {
         if (this.mProgressView != null) {
             Bundle bundle = getArguments();
-            String message = bundle.getString(KEY_SHOW_MESSAGE, "");
+            CharSequence message = bundle.getString(KEY_SHOW_MESSAGE, "");
             this.mProgressView.startAnimation(message);
         }
     }
 
 
-    public void show(FragmentManager mManager,boolean canceledOnTouchOutside, String message) {
+    public void show(FragmentManager mManager, CharSequence message) {
         Bundle bundle = new Bundle();
-        bundle.putString(KEY_SHOW_MESSAGE, message);
-        bundle.putBoolean(KEY_CANCELED_TOUCH_OUTSIDE, canceledOnTouchOutside);
+        bundle.putCharSequence(KEY_SHOW_MESSAGE, message);
         setArguments(bundle);
         show(mManager, TAG);
     }

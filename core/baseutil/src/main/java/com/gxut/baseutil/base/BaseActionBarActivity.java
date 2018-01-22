@@ -6,9 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.view.View;
 
-import com.gxut.baseutil.widget.progress.LoadProgress;
-import com.gxut.baseutil.widget.progress.ProgressView;
-import com.gxut.baseutil.widget.progress.SimpleProgressView;
+
 import com.gxut.ui.swipebacklayout.SwipeBackActivity;
 import com.gxut.ui.swipebacklayout.layout.SwipeBackLayout;
 
@@ -77,35 +75,13 @@ public abstract class BaseActionBarActivity extends SwipeBackActivity {
         getSwipeBackLayout().setScreenScllor(enable);
     }
 
-    protected ProgressView getProgressView() {
-        return new SimpleProgressView(ct);
-    }
 
     /*设置标题*/
     public final void setTitle(CharSequence title) {
         getSupportActionBar().setTitle(title);
     }
 
-    protected LoadProgress mProgress;
 
-    protected final void showProgress(boolean canCancel, String message) {
-        mProgress = LoadProgress.newInstance(getProgressView());
-        mProgress.show(getFragmentManager(), canCancel, message);
-    }
-
-    protected final void showProgress(boolean canCancel) {
-        showProgress(canCancel, null);
-    }
-
-    protected final void showProgress() {
-        showProgress(true, null);
-    }
-
-    protected final void dismissProgress() {
-        if (mProgress != null) {
-            mProgress.dismiss();
-        }
-    }
 
     /*初始化界面，在super.onCreate 之前*/
     protected void preCreate() {

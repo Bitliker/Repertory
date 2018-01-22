@@ -1,4 +1,4 @@
-package com.gxut.baseutil.widget.progress;
+package com.gxut.ui.facedialog.progress;
 
 import android.content.Context;
 import android.support.v7.widget.AppCompatImageView;
@@ -8,7 +8,8 @@ import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 
-import com.gxut.baseutil.R;
+import com.gxut.ui.facedialog.R;
+
 
 /**
  * Created by Bitlike on 2018/1/11.
@@ -26,7 +27,7 @@ public class SimpleProgressView extends ProgressView {
     }
 
     @Override
-    protected void startAnimation(String message) {
+    protected void startAnimation(CharSequence message) {
         RotateAnimation rotate = new RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         LinearInterpolator lin = new LinearInterpolator();
         rotate.setInterpolator(lin);
