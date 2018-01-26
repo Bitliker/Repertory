@@ -3,12 +3,11 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
-    android:paddingLeft="8dp"
-    android:paddingRight="8dp"
     android:orientation="vertical">
 
 
     <RelativeLayout
+        android:id="@+id/baseRl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/radian_top_white_bg">
@@ -22,14 +21,9 @@
             android:gravity="center_horizontal"
             android:padding="8dp"
             android:text="title"
-            android:textSize="16sp"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="20sp"
             android:textStyle="bold" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_below="@id/titleTv"
-            android:background="#e8e8e8" />
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/contentTv"
@@ -39,12 +33,13 @@
             android:gravity="center_horizontal"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
-            android:paddingTop="14dp"
+            android:paddingTop="20dp"
             android:text="message"
-            android:paddingBottom="14dp"
+            android:paddingBottom="20dp"
             android:textSize="16sp" />
 
         <View
+            android:id="@+id/bottomv"
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_below="@id/contentTv"
@@ -68,8 +63,10 @@
             android:clickable="true"
             android:gravity="center"
             android:padding="8dp"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="18sp"
             android:text="确定" />
+
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/cancelTv"
@@ -81,6 +78,7 @@
             android:clickable="true"
             android:gravity="center"
             android:padding="8dp"
+            android:textColor="?android:attr/textColorPrimary"
             android:text="取消" />
     </LinearLayout>
 

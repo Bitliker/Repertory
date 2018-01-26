@@ -24,6 +24,9 @@
 ### swipebacklayout
 > 滑动退出控件的依赖
 
+### facedialog
+> android弹框控件
+
 
 ## 引用
 ##### 在项目工程中build.gradle中的allprojects.repositories标签下添加仓库如 
@@ -39,7 +42,7 @@
 	}
 
 
-### baseutil
+## baseutil
 ####  maven引用方式
 	<dependency>
 		<groupId>com.gxut.core</groupId>
@@ -51,6 +54,9 @@
 ####  gradle引用方式
 	compile 'com.gxut.core:baseutil:v1.0.5'
 
+####  update
+v1.0.6
+> 移除等待进度条，将等待进度整合到了facedialog
 
 
 #### updata v1.0.2
@@ -115,4 +121,25 @@
 
 ----------
 
+
 ----------
+
+## facedialog
+####  maven引用方式
+	<dependency>
+		<groupId>com.gxut.ui</groupId>
+		<artifactId>facedialog</artifactId>
+		<version>vv0.6.0</version>
+		<type>pom</type>
+	</dependency>
+
+####  gradle引用方式
+	compile 'com.gxut.ui:facedialog:v0.6.0'
+
+####  update
+v1.0.0
+> 更新版本，提供提示框、等待框、列表选择框
+
+----------
+
+ 

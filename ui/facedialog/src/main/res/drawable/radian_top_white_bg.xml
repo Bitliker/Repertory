@@ -8,7 +8,7 @@
         android:width="0.3dp"
         android:color="#FFFFFF" />
     <!-- corners 设置边框四角弧度 -->
-    <corners android:topRightRadius="10dp" android:topLeftRadius="10dp"/>
+    <corners android:topRightRadius="5dp" android:topLeftRadius="5dp"/>
 
 
 </shape>

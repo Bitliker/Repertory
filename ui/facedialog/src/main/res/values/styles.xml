@@ -1,0 +1,6 @@
+<resources>
+
+    <style name="DialogBottomAnim" mce_bogus="1" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/anim_in_dialog_b</item>
+    </style>
+</resources>

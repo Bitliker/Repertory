@@ -1,130 +1,112 @@
 package com.gxut.ui.facedialog.prompt;
 
-import android.annotation.SuppressLint;
-import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.FragmentManager;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.AppCompatTextView;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
+import android.util.TypedValue;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.gxut.ui.facedialog.R;
-import com.gxut.ui.facedialog.common.Param;
+import com.gxut.ui.facedialog.common.DialogParamer;
+import com.gxut.ui.facedialog.common.FaceDialogFragment;
+import com.gxut.ui.facedialog.common.WidgetParamer;
 
 /**
- * Created by Bitlike on 2018/1/22.
+ * Created by Bitlike on 2018/1/25.
  */
 
-public class PromptDialog extends DialogFragment implements View.OnClickListener {
-    private final String TAG = "PromptDialog";
-    private final String TITLE = "title";
-    private final String CONTENT = "content";
-    private final String ANIMATIONS_IDS = "animationsIds";
+public class PromptDialog extends FaceDialogFragment implements View.OnClickListener {
 
-    @SuppressLint("ValidFragment")
-    private PromptDialog() {
-    }
-
-    public static PromptDialog newInstance() {
-        return new PromptDialog();
-    }
-
-
-    private Param.PromptParam promptParam;
-    private View.OnClickListener sureOnclickListener, cancelOnclickListener;
-
-    public void setPromptParam(Param.PromptParam promptParam) {
-        this.promptParam = promptParam;
-    }
-
-    public void setCancelOnclickListener(View.OnClickListener cancelOnclickListener) {
-        this.cancelOnclickListener = cancelOnclickListener;
-    }
-
-    public void setSureOnclickListener(View.OnClickListener sureOnclickListener) {
-        this.sureOnclickListener = sureOnclickListener;
-    }
+    private final String KEY_SURE_PARAMER = "key_sure_paramer";
+    private final String KEY_CANCEL_PARAMER = "key_cancel_paramer";
+    private final String KEY_TITLE = "key_title";
+    private final String KEY_CONTENT = "key_content";
 
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        Dialog dialog = new Dialog(getActivity(), R.style.LoadDialogStyle);
-        dialog.setCanceledOnTouchOutside(promptParam.canceledOnTouchOutside);
-        dialog.setCancelable(promptParam.cancelable);
-        if (promptParam.animationsIds > 0) {
-            dialog.getWindow().setWindowAnimations(promptParam.animationsIds);
-        }
-        return dialog;
+    protected int getInflater() {
+        return R.layout.view_dialog_prompt;
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.view_dialog_prompt, container, false);
-    }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        initView(view);
-    }
+    protected void initView(View view) {
+        AppCompatTextView titleTv = view.findViewById(R.id.titleTv);
+        AppCompatTextView contentTv = view.findViewById(R.id.contentTv);
+        AppCompatTextView sureTv = view.findViewById(R.id.sureTv);
+        AppCompatTextView cancelTv = view.findViewById(R.id.cancelTv);
 
-    private void initView(View view) {
-        TextView titleTv = view.findViewById(R.id.titleTv);
-        TextView contentTv = view.findViewById(R.id.contentTv);
-        TextView sureTv = view.findViewById(R.id.sureTv);
-        TextView cancelTv = view.findViewById(R.id.cancelTv);
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            CharSequence title = bundle.getCharSequence(TITLE, "提示");
-            CharSequence content = bundle.getCharSequence(CONTENT, "");
-            titleTv.setText(title);
-            contentTv.setText(content);
-        }
-
-        if (this.promptParam != null) {
-            int textSize = Math.max(this.promptParam.sureTextSize, this.promptParam.cancelTextSize);
-            if (!TextUtils.isEmpty(this.promptParam.sureText)) {
-                sureTv.setText(this.promptParam.sureText);
-                sureTv.setTextSize(textSize);
-                if (this.promptParam.sureTextColor > 0) {
-                    sureTv.setTextColor(this.promptParam.sureTextColor);
-                }
+        Bundle args = getArguments();
+        if (args != null) {
+            CharSequence title = args.getCharSequence(KEY_TITLE);
+            CharSequence content = args.getCharSequence(KEY_CONTENT);
+            if (!TextUtils.isEmpty(title)) {
+                titleTv.setText(title);
             }
-            if (!TextUtils.isEmpty(this.promptParam.cancelText)) {
-                cancelTv.setText(this.promptParam.cancelText);
-                cancelTv.setTextSize(textSize);
-                if (this.promptParam.cancelTextColor > 0) {
-                    cancelTv.setTextColor(this.promptParam.cancelTextColor);
-                }
+            if (!TextUtils.isEmpty(content)) {
+                contentTv.setText(content);
+            }
+        }
 
+        WidgetParamer sureWidgetParamer = getWidgetParamer(KEY_SURE_PARAMER);
+        if (sureWidgetParamer == null) {
+            sureTv.setVisibility(View.GONE);
+            cancelTv.setBackgroundResource(R.drawable.selector_b_white_hint_bg);
+        } else {
+            sureTv.setText(TextUtils.isEmpty(sureWidgetParamer.text) ? "" : sureWidgetParamer.text);
+            if (sureWidgetParamer.textColor > 0) {
+                sureTv.setTextColor(sureWidgetParamer.textColor);
+            }
+            if (sureWidgetParamer.textSize > 0) {
+                sureTv.setTextSize(TypedValue.COMPLEX_UNIT_SP, sureWidgetParamer.textSize);
+            }
+            sureTv.setOnClickListener(this);
+        }
+        WidgetParamer cancelWidgetParamer = getWidgetParamer(KEY_CANCEL_PARAMER);
+        if (cancelWidgetParamer == null) {
+            cancelTv.setVisibility(View.GONE);
+            if (sureTv.getVisibility() == View.VISIBLE) {
+                sureTv.setBackgroundResource(R.drawable.selector_b_white_hint_bg);
+            } else {
+                findViewById(R.id.baseRl).setBackgroundResource(R.drawable.radian_white_bg);
+                findViewById(R.id.bottomv).setVisibility(View.GONE);
+            }
+        } else {
+            cancelTv.setText(TextUtils.isEmpty(cancelWidgetParamer.text) ? "" : cancelWidgetParamer.text);
+            if (cancelWidgetParamer.textColor > 0) {
+                cancelTv.setTextColor(cancelWidgetParamer.textColor);
+            }
+            if (cancelWidgetParamer.textSize > 0) {
+                cancelTv.setTextSize(TypedValue.COMPLEX_UNIT_SP, cancelWidgetParamer.textSize);
             }
         }
         cancelTv.setOnClickListener(this);
-        sureTv.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.cancelTv) {
-            if (cancelOnclickListener != null) {
-                cancelOnclickListener.onClick(v);
-            }
-        } else if (v.getId() == R.id.sureTv) {
-            if (sureOnclickListener != null) {
-                sureOnclickListener.onClick(v);
-            }
+        String key = null;
+        if (v.getId() == R.id.sureTv) {
+            key = KEY_SURE_PARAMER;
+        } else if (v.getId() == R.id.cancelTv) {
+            key = KEY_CANCEL_PARAMER;
+        }
+        WidgetParamer mWidgetParamer = getWidgetParamer(key);
+        if (mWidgetParamer != null && mWidgetParamer.onClickListener != null) {
+            mWidgetParamer.onClickListener.onClick(v);
         }
         dismiss();
     }
 
-    public void show(FragmentManager mManager, CharSequence title, CharSequence content) {
+
+    public void show(FragmentManager mManager, CharSequence title, CharSequence content, DialogParamer mDialogParamer,
+                     WidgetParamer sureWidgetParamer, WidgetParamer cancelWidgetParamer) {
         Bundle bundle = new Bundle();
-        bundle.putCharSequence(TITLE, title);
-        bundle.putCharSequence(CONTENT, content);
+        bundle.putCharSequence(KEY_TITLE, title);
+        bundle.putCharSequence(KEY_CONTENT, content);
+        bundle.putParcelable(KEY_SURE_PARAMER, sureWidgetParamer);
+        bundle.putParcelable(KEY_CANCEL_PARAMER, cancelWidgetParamer);
+        bundle.putParcelable(KEY_DIALOG_PARAMER, mDialogParamer);
         setArguments(bundle);
         show(mManager, TAG);
     }

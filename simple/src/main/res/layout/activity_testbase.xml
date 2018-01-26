@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
 
     <Button
-        android:id="@+id/testBtn"
+        android:id="@+id/progree"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="点击"/>
-</RelativeLayout>
+        android:text="进度" />
+
+    <Button
+        android:id="@+id/prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="弹框" />
+
+    <Button
+        android:id="@+id/list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="列表" />
+</LinearLayout>
