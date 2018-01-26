@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.gxut.baseutil.util.ToastUtils;
 import com.gxut.simple.R;
+import com.gxut.simple.model.User;
 import com.gxut.ui.facedialog.FaceDialog;
 import com.gxut.ui.facedialog.common.OnMultiSelectListener;
 import com.gxut.ui.facedialog.list.ListModel;
@@ -26,7 +27,6 @@ public class TestBaseActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void init() throws Exception {
         ToastUtils.init(ct);
-
         findViewById(R.id.progree).setOnClickListener(this);
         findViewById(R.id.prompt).setOnClickListener(this);
         findViewById(R.id.list).setOnClickListener(this);
@@ -34,13 +34,23 @@ public class TestBaseActivity extends BaseActivity implements View.OnClickListen
 
 
     private void showListDialog() {
-        ArrayList<ListModel> models = new ArrayList<>();
+        ArrayList<User> users = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
-            ListModel e = new ListModel();
-            e.setContent("这个是内容" + i);
-            models.add(e);
+            User user = new User();
+            user.setName("名字" + i);
+            user.setAge(i);
+            user.setSix(i % 2 == 0 ? "男" : "女");
+            users.add(user);
         }
-        new FaceDialog.Builder<>(this)
+
+        ArrayList<ListModel<User>> models = new ArrayList<>();
+
+        for (User user:users) {
+            models.add(new ListModel<User>(false,user.getName(),user));
+        }
+
+
+        new FaceDialog.Builder<User>(this)
                 .setCancelable(false)
                 .setCanceledOnTouchOutside(false)
                 .setTitle("这个是标题")
@@ -51,10 +61,18 @@ public class TestBaseActivity extends BaseActivity implements View.OnClickListen
                         Log.i("gongpengming", "不取消");
                     }
                 })
-                .setModels(models, new OnMultiSelectListener() {
+                .setModels(models, new OnMultiSelectListener<User>() {
                     @Override
-                    public void selected(List list) {
-                        Log.i("gongpengming", "listModels=" + list.size());
+                    public void selected(List<ListModel<User>> listModels) {
+                        for (ListModel<User> e:listModels){
+                            Log.i("gongpengming","___________________________");
+                            Log.i("gongpengming","e="+e.isClicked());
+                            Log.i("gongpengming","e="+e.getContent());
+                            User u=e.getData();
+                            Log.i("gongpengming","u="+u.getAge());
+                            Log.i("gongpengming","u="+u.getSix());
+                            Log.i("gongpengming","u="+u.getName());
+                        }
                     }
                 })
                 .show();

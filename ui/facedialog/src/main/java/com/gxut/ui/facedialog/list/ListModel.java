@@ -7,7 +7,7 @@ import android.os.Parcelable;
  * Created by Bitlike on 2018/1/22.
  */
 
-public class ListModel<T extends Parcelable> implements Parcelable {
+public class ListModel<T> implements Parcelable {
     private boolean clicked;
     private String content;
     private T data;
@@ -48,8 +48,21 @@ public class ListModel<T extends Parcelable> implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeByte(this.clicked ? (byte) 1 : (byte) 0);
         dest.writeString(this.content);
-        dest.writeString(this.data.getClass().getName());
-        dest.writeParcelable(this.data, flags);
+    }
+
+    public ListModel(String content) {
+        this.content = content;
+    }
+
+    public ListModel(boolean clicked, String content) {
+        this.clicked = clicked;
+        this.content = content;
+    }
+
+    public ListModel(boolean clicked, String content, T data) {
+        this.clicked = clicked;
+        this.content = content;
+        this.data = data;
     }
 
     public ListModel() {
@@ -58,12 +71,7 @@ public class ListModel<T extends Parcelable> implements Parcelable {
     protected ListModel(Parcel in) {
         this.clicked = in.readByte() != 0;
         this.content = in.readParcelable(CharSequence.class.getClassLoader());
-        String dataName = in.readString();
-        try {
-            this.data = in.readParcelable(Class.forName(dataName).getClassLoader());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+
     }
 
     public static final Parcelable.Creator<ListModel> CREATOR = new Parcelable.Creator<ListModel>() {

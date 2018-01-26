@@ -1,6 +1,5 @@
 package com.gxut.ui.facedialog;
 
-import android.os.Parcelable;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -33,7 +32,7 @@ public class FaceDialog {
         }
     }
 
-    public static class Builder<T extends Parcelable> {
+    public static class Builder<T> {
         private FragmentActivity context;
 
         private boolean canceledOnTouchOutside;

@@ -161,6 +161,18 @@ public class ListDialog<T extends Parcelable> extends FaceDialogFragment impleme
             this.multi = multi;
             if (multi) {
                 selectModels = new ArrayList<>();
+                if (this.models != null) {
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            for (ListModel<T> e : ListAdapter.this.models) {
+                                if (e.isClicked()) {
+                                    selectModels.add(e);
+                                }
+                            }
+                        }
+                    }).start();
+                }
             }
         }
 
