@@ -2,6 +2,7 @@ package com.gxut.ui.facedialog;
 
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 
 import com.gxut.ui.facedialog.common.DialogParamer;
@@ -51,6 +52,11 @@ public class FaceDialog {
 
         public Builder(FragmentActivity context) {
             this.context = context;
+            this.gravity= Gravity.CENTER;
+            this.cancelable=true;
+            this.canceledOnTouchOutside=true;
+            this.animationsStyle=-1;
+
         }
 
         public Builder setTitle(CharSequence title) {
@@ -138,6 +144,8 @@ public class FaceDialog {
             mDialogParamer.animationsStyle = this.animationsStyle;
             mDialogParamer.cancelable = this.cancelable;
             mDialogParamer.canceledOnTouchOutside = this.canceledOnTouchOutside;
+            mDialogParamer.gravity = this.gravity;
+
         }
 
         public FaceDialog show() {
@@ -147,8 +155,10 @@ public class FaceDialog {
                 setDialogParamer(mDialogParamer);
                 mDialogParamer.onItemSelectListener = this.onItemSelectListener;
                 mDialogParamer.onMultiSelectListener = this.onMultiSelectListener;
-                mDialogParamer.gravity = this.gravity;
                 mDialogParamer.multi = onMultiSelectListener != null;
+                if ( this.cancelWidgetParamer==null){
+                    this.cancelWidgetParamer=new WidgetParamer("取消");
+                }
                 mListDialog.show(context.getSupportFragmentManager(), title, this.models, mDialogParamer, this.cancelWidgetParamer);
                 return ceateFaceDialog(mListDialog);
             } else if (content != null && title != null) {

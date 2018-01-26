@@ -21,7 +21,7 @@
             android:gravity="center_horizontal"
             android:padding="8dp"
             android:text="title"
-            android:textColor="?android:attr/textColorPrimary"
+            android:textColor="?attr/colorAccent"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -63,7 +63,7 @@
             android:clickable="true"
             android:gravity="center"
             android:padding="8dp"
-            android:textColor="?android:attr/textColorPrimary"
+            android:textColor="?attr/colorAccent"
             android:textSize="18sp"
             android:text="确定" />
 
@@ -78,7 +78,7 @@
             android:clickable="true"
             android:gravity="center"
             android:padding="8dp"
-            android:textColor="?android:attr/textColorPrimary"
+            android:textColor="?attr/colorAccent"
             android:text="取消" />
     </LinearLayout>
 

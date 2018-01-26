@@ -1,5 +1,6 @@
 package com.gxut.ui.facedialog.list;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.FragmentManager;
@@ -93,7 +94,14 @@ public class ListDialog<T extends Parcelable> extends FaceDialogFragment impleme
             if (params != null) {
                 DisplayMetrics dm = new DisplayMetrics();
                 getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
-                params.height = dm.heightPixels / 2;
+                Configuration mConfiguration = this.getResources().getConfiguration(); //获取设置的配置信息
+                int ori = mConfiguration.orientation; //获取屏幕方向
+                if (ori == mConfiguration.ORIENTATION_LANDSCAPE) {
+                    //横屏
+                    params.height = (dm.widthPixels * 2) / 3;
+                } else {
+                    params.height = dm.heightPixels / 2;
+                }
                 mRecyclerView.setLayoutParams(params);
             }
         }
