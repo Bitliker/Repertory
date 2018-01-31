@@ -1,5 +1,7 @@
 package com.gxut.simple.ui.activity;
 
+import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -19,6 +21,8 @@ import java.util.List;
  */
 
 public class TestBaseActivity extends BaseActivity implements View.OnClickListener {
+
+
     @Override
     protected int initLayout() {
         return R.layout.activity_testbase;
@@ -45,8 +49,8 @@ public class TestBaseActivity extends BaseActivity implements View.OnClickListen
 
         ArrayList<ListModel<User>> models = new ArrayList<>();
 
-        for (User user:users) {
-            models.add(new ListModel<User>(false,user.getName(),user));
+        for (User user : users) {
+            models.add(new ListModel<User>(false, user.getName(), user));
         }
 
 
@@ -64,14 +68,14 @@ public class TestBaseActivity extends BaseActivity implements View.OnClickListen
                 .setModels(models, new OnMultiSelectListener<User>() {
                     @Override
                     public void selected(List<ListModel<User>> listModels) {
-                        for (ListModel<User> e:listModels){
-                            Log.i("gongpengming","___________________________");
-                            Log.i("gongpengming","e="+e.isClicked());
-                            Log.i("gongpengming","e="+e.getContent());
-                            User u=e.getData();
-                            Log.i("gongpengming","u="+u.getAge());
-                            Log.i("gongpengming","u="+u.getSix());
-                            Log.i("gongpengming","u="+u.getName());
+                        for (ListModel<User> e : listModels) {
+                            Log.i("gongpengming", "___________________________");
+                            Log.i("gongpengming", "e=" + e.isClicked());
+                            Log.i("gongpengming", "e=" + e.getContent());
+                            User u = e.getData();
+                            Log.i("gongpengming", "u=" + u.getAge());
+                            Log.i("gongpengming", "u=" + u.getSix());
+                            Log.i("gongpengming", "u=" + u.getName());
                         }
                     }
                 })
@@ -80,13 +84,12 @@ public class TestBaseActivity extends BaseActivity implements View.OnClickListen
 
     }
 
-    private void showLoad() {
-        new FaceDialog.Builder<>(this)
-                .setCancelable(false)
-                .setCanceledOnTouchOutside(false)
-                .setContent("这个是内容")
-                .showWait();
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
     }
+
+
 
     private void showParamDiaLog() {
 
@@ -114,7 +117,7 @@ public class TestBaseActivity extends BaseActivity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.progree:
-                showLoad();
+                showProgress();
                 break;
             case R.id.prompt:
                 showParamDiaLog();

@@ -25,8 +25,8 @@ dependencies {
 }
 
 def repertoyAllName = 'com.gxut.ui'   ////最终引用形式，如compile 'com.gxut.ui.baseurl:1.0.0'，中的com.gxut.ui部分
-def versionCode = '0.9.1'                 // 发布版本号
-def versionName = 'v0.9.1'                // 发布版本名字
+def versionCode = '0.9.6'                 // 发布版本号
+def versionName = 'v0.9.6'                // 发布版本名字
 def repertoyName = 'ui'               //仓库名称
 def projectName = 'FaceDialog'             //项目名称
 def organizationName = 'gxut'           //组织名称

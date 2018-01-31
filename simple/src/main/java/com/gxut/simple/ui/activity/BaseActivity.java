@@ -8,21 +8,6 @@ import com.gxut.baseutil.base.BaseToolBarActivity;
 
 public abstract class BaseActivity extends BaseToolBarActivity {
 
-    protected final void showProgress(boolean canCancel, String message) {
-
-    }
-
-    protected final void showProgress(boolean canCancel) {
-        showProgress(canCancel, null);
-    }
-
-    protected final void showProgress() {
-        showProgress(true, null);
-    }
-
-    protected final void dismissProgress() {
-
-    }
 
 
 }

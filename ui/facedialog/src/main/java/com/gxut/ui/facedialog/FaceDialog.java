@@ -1,5 +1,6 @@
 package com.gxut.ui.facedialog;
 
+import android.content.pm.PackageManager;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -13,7 +14,6 @@ import com.gxut.ui.facedialog.common.OnMultiSelectListener;
 import com.gxut.ui.facedialog.common.WidgetParamer;
 import com.gxut.ui.facedialog.list.ListDialog;
 import com.gxut.ui.facedialog.list.ListModel;
-import com.gxut.ui.facedialog.progress.SimpleWaitDialog;
 import com.gxut.ui.facedialog.prompt.PromptDialog;
 
 import java.util.ArrayList;
@@ -34,6 +34,8 @@ public class FaceDialog {
     }
 
     public static class Builder<T> {
+        private final int DEF_GRAVITY = -126783;
+
         private FragmentActivity context;
 
         private boolean canceledOnTouchOutside;
@@ -52,11 +54,12 @@ public class FaceDialog {
 
         public Builder(FragmentActivity context) {
             this.context = context;
-            this.gravity= Gravity.CENTER;
-            this.cancelable=true;
-            this.canceledOnTouchOutside=true;
-            this.animationsStyle=-1;
-
+            this.gravity = DEF_GRAVITY;
+            this.cancelable = true;
+            this.canceledOnTouchOutside = true;
+            this.animationsStyle = -1;
+            PackageManager pm = context.getPackageManager();
+            this.title = context.getApplicationInfo().loadLabel(pm).toString();
         }
 
         public Builder setTitle(CharSequence title) {
@@ -105,12 +108,12 @@ public class FaceDialog {
         }
 
 
-        public Builder setOnItemSelectListener(OnItemSelectListener<T> onItemSelectListener) {
+        private Builder setOnItemSelectListener(OnItemSelectListener<T> onItemSelectListener) {
             this.onItemSelectListener = onItemSelectListener;
             return this;
         }
 
-        public Builder setOnMultiSelectListener(OnMultiSelectListener<T> onMultiSelectListener) {
+        private Builder setOnMultiSelectListener(OnMultiSelectListener<T> onMultiSelectListener) {
             this.onMultiSelectListener = onMultiSelectListener;
             return this;
         }
@@ -153,11 +156,14 @@ public class FaceDialog {
                 ListDialog mListDialog = new ListDialog();
                 ListDialogParamer mDialogParamer = new ListDialogParamer();
                 setDialogParamer(mDialogParamer);
+                if (mDialogParamer.gravity == DEF_GRAVITY) {
+                    mDialogParamer.gravity = Gravity.CENTER;
+                }
                 mDialogParamer.onItemSelectListener = this.onItemSelectListener;
                 mDialogParamer.onMultiSelectListener = this.onMultiSelectListener;
                 mDialogParamer.multi = onMultiSelectListener != null;
-                if ( this.cancelWidgetParamer==null){
-                    this.cancelWidgetParamer=new WidgetParamer("取消");
+                if (this.cancelWidgetParamer == null) {
+                    this.cancelWidgetParamer = new WidgetParamer("取消");
                 }
                 mListDialog.show(context.getSupportFragmentManager(), title, this.models, mDialogParamer, this.cancelWidgetParamer);
                 return ceateFaceDialog(mListDialog);
@@ -179,13 +185,7 @@ public class FaceDialog {
         }
 
 
-        public FaceDialog showWait() {
-            SimpleWaitDialog mLoadDialog = new SimpleWaitDialog();
-            DialogParamer mDialogParamer = new DialogParamer();
-            setDialogParamer(mDialogParamer);
-            mLoadDialog.show(context.getSupportFragmentManager(), content, mDialogParamer);
-            return ceateFaceDialog(mLoadDialog);
-        }
+
 
 
     }

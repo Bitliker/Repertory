@@ -1,4 +1,4 @@
-package com.gxut.ui.facedialog.progress;
+package com.gxut.baseutil.widget;
 
 import android.content.Context;
 import android.support.v7.widget.AppCompatImageView;
@@ -8,7 +8,7 @@ import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 
-import com.gxut.ui.facedialog.R;
+import com.gxut.baseutil.R;
 
 
 /**
@@ -28,14 +28,29 @@ public class SimpleProgressView extends ProgressView {
 
     @Override
     protected void startAnimation(CharSequence message) {
-        RotateAnimation rotate = new RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        LinearInterpolator lin = new LinearInterpolator();
-        rotate.setInterpolator(lin);
-        rotate.setDuration(1500);//设置动画持续时间
-        rotate.setRepeatCount(-1);//设置重复次数
-        rotate.setFillAfter(true);//动画执行完后是否停留在执行完的状态
-        rotate.setStartOffset(10);//执行前的等待时间
-        progressImg.setAnimation(rotate);
+        progressImg.setAnimation(getImgAnimation());
         progressTv.setText(message == null ? "" : message);
+    }
+
+    private Animation rotate;
+
+    private Animation getImgAnimation() {
+        if (rotate == null) {
+            rotate = new RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+            LinearInterpolator lin = new LinearInterpolator();
+            rotate.setInterpolator(lin);
+            rotate.setDuration(1500);//设置动画持续时间
+            rotate.setRepeatCount(-1);//设置重复次数
+            rotate.setFillAfter(true);//动画执行完后是否停留在执行完的状态
+            rotate.setStartOffset(10);//执行前的等待时间
+        }
+        return rotate;
+    }
+
+    @Override
+    protected void stopAnimation() {
+        if (progressImg != null) {
+            progressImg.setAnimation(null);
+        }
     }
 }

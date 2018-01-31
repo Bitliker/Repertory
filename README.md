@@ -47,12 +47,12 @@
 	<dependency>
 		<groupId>com.gxut.core</groupId>
 		<artifactId>baseutil</artifactId>
-		<version>v1.0.5</version>
+		<version>v1.1.0</version>
 		<type>pom</type>
 	</dependency>
 
 ####  gradle引用方式
-	compile 'com.gxut.core:baseutil:v1.0.5'
+	compile 'com.gxut.core:baseutil:v1.1.0'
 
 ####  update
 v1.0.6
@@ -129,12 +129,12 @@ v1.0.6
 	<dependency>
 		<groupId>com.gxut.ui</groupId>
 		<artifactId>facedialog</artifactId>
-		<version>vv0.6.0</version>
+		<version>v0.9.6</version>
 		<type>pom</type>
 	</dependency>
 
 ####  gradle引用方式
-	compile 'com.gxut.ui:facedialog:v0.6.0'
+	compile 'com.gxut.ui:facedialog:v0.9.6'
 
 ####  update
 v0.7.0

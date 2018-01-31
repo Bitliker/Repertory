@@ -1,4 +1,4 @@
-package com.gxut.ui.facedialog.progress;
+package com.gxut.baseutil.widget;
 
 import android.content.Context;
 import android.widget.RelativeLayout;
@@ -16,5 +16,7 @@ public abstract class ProgressView extends RelativeLayout implements Serializabl
 
 
     protected abstract void startAnimation(CharSequence message);
+    
+    protected abstract void stopAnimation();
 
 }

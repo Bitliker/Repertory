@@ -15,6 +15,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gxut.baseutil.R;
+import com.gxut.baseutil.widget.ProgressView;
+import com.gxut.baseutil.widget.SimpleProgressView;
+import com.gxut.baseutil.widget.WaitDialog;
 import com.gxut.ui.swipebacklayout.SwipeBackActivity;
 import com.gxut.ui.swipebacklayout.layout.SwipeBackLayout;
 
@@ -30,6 +33,7 @@ public abstract class BaseToolBarActivity extends SwipeBackActivity {
     private Toolbar commonToolBar;
     private TextView commonTitleTv;
     private RelativeLayout contentRl;
+    private WaitDialog mWaitDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,8 +52,23 @@ public abstract class BaseToolBarActivity extends SwipeBackActivity {
             e.printStackTrace();
         }
         getSwipeBackLayout().setEdgeTrackingEnabled(getSwipeMode());
+
+        if (savedInstanceState != null) {
+            boolean showWait = savedInstanceState.getBoolean(KEY_SHOW_WAIT, false);
+            if (showWait) {
+                showProgress();
+            }
+        }
+
     }
 
+    private final String KEY_SHOW_WAIT = "show_wait";
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(KEY_SHOW_WAIT, mWaitDialog != null && mWaitDialog.isShowing());
+    }
 
     @Override
     public void setContentView(@LayoutRes int layoutId) {
@@ -63,6 +82,47 @@ public abstract class BaseToolBarActivity extends SwipeBackActivity {
 
         }
     }
+
+    public final void showProgress() {
+        showProgress(true, "");
+    }
+
+    public final void showProgress(CharSequence content) {
+        showProgress(true, content);
+    }
+
+    public final void showProgress(boolean cancelable) {
+        showProgress(cancelable, "");
+    }
+
+    public final void dismissProgress() {
+        if (mWaitDialog != null && mWaitDialog.isShowing()) {
+            mWaitDialog.dismiss();
+        }
+    }
+
+    public final void showProgress(boolean cancelable, CharSequence content) {
+        if (mWaitDialog == null) {
+            mWaitDialog = new WaitDialog(this) {
+                @Override
+                protected ProgressView getProgressView() {
+                    return BaseToolBarActivity.this.getProgressView();
+                }
+            };
+        }
+        mWaitDialog.show(cancelable, content);
+    }
+
+    protected void dismiss() {
+        if (mWaitDialog != null && mWaitDialog.isShowing()) {
+            mWaitDialog.dismiss();
+        }
+    }
+
+    protected ProgressView getProgressView() {
+        return new SimpleProgressView(this);
+    }
+
 
     @Override
     public void setContentView(View contentView) {
@@ -113,7 +173,6 @@ public abstract class BaseToolBarActivity extends SwipeBackActivity {
     protected final void setScreenScllor(boolean enable) {
         getSwipeBackLayout().setScreenScllor(enable);
     }
-
 
 
     /*设置自定义的toolbar*/
