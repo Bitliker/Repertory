@@ -43,6 +43,7 @@ dependencies {
     implementation project(':network')
     implementation project(':commonui')
     implementation project(':baseutil')
+    implementation project(':refreshlayout')
     implementation project(':facedialog')
 }
 

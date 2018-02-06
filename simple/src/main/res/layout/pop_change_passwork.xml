@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/marginXL">
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/titleTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="标题"
+        android:textColor="@color/textColorMain"
+        android:textSize="@dimen/textSizeXL"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/passWorkTv"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/marginM"
+        android:layout_marginTop="@dimen/marginXL"
+        android:text="原密码"
+        app:layout_constraintTop_toBottomOf="@id/titleTv" />
+
+    <com.gxut.ui.commonui.text.ClearEditText
+        android:id="@+id/passWorkEd"
+        android:textSize="@dimen/textSizeM"
+        android:layout_width="0dp"
+        android:padding="@dimen/marginS"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/marginM"
+        android:background="@drawable/bg_transparent_ed"
+        android:ellipsize="end"
+        android:inputType="textPassword"
+        android:gravity="center_vertical"
+        android:lines="1"
+        android:hint="原密码"
+        android:textColor="@color/textColorMain"
+        app:layout_constraintBottom_toBottomOf="@id/passWorkTv"
+        app:layout_constraintLeft_toRightOf="@id/passWorkTv"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/passWorkTv" />
+
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/newPassWorkTv"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/marginM"
+        android:layout_marginTop="@dimen/marginXL"
+        android:text="新密码"
+        app:layout_constraintTop_toBottomOf="@id/passWorkTv" />
+
+    <com.gxut.ui.commonui.text.ClearEditText
+        android:id="@+id/newPassWorkEd"
+        android:layout_width="0dp"
+        android:textSize="@dimen/textSizeM"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/marginM"
+        android:padding="@dimen/marginS"
+        android:background="@drawable/bg_transparent_ed"
+        android:ellipsize="end"
+        android:inputType="textPassword"
+        android:gravity="center_vertical"
+        android:lines="1"
+        android:hint="新密码"
+        android:textColor="@color/textColorMain"
+        app:layout_constraintBottom_toBottomOf="@id/newPassWorkTv"
+        app:layout_constraintLeft_toRightOf="@id/newPassWorkTv"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/newPassWorkTv" />
+
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/confirmTv"
+        android:layout_width="60dp"
+        android:layout_marginBottom="@dimen/marginXL"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/marginM"
+        android:layout_marginTop="@dimen/marginXL"
+        android:text="确认密码"
+        app:layout_constraintTop_toBottomOf="@id/newPassWorkTv" />
+
+    <com.gxut.ui.commonui.text.ClearEditText
+        android:id="@+id/confirmEd"
+        android:layout_width="0dp"
+        android:textSize="@dimen/textSizeM"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/marginM"
+        android:padding="@dimen/marginS"
+        android:background="@drawable/bg_transparent_ed"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:inputType="textPassword"
+        android:lines="1"
+        android:hint="确认密码"
+        android:textColor="@color/textColorMain"
+        app:layout_constraintBottom_toBottomOf="@id/confirmTv"
+        app:layout_constraintLeft_toRightOf="@id/confirmTv"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/confirmTv" />
+
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/sureTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="@dimen/marginXL"
+        android:background="@drawable/bg_blue_hint_btn"
+        android:padding="@dimen/marginS"
+        android:text="确认修改"
+        android:textColor="@color/white"
+        android:clickable="true"
+        android:textSize="@dimen/textSizeM"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/confirmTv" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/cancelTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:textColor="@color/white"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="@dimen/marginXL"
+        android:background="@drawable/bg_blue_hint_btn"
+        android:padding="@dimen/marginS"
+        android:text="取消修改"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/confirmTv" />
+</android.support.constraint.ConstraintLayout>

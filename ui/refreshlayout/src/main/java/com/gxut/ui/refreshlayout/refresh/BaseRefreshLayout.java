@@ -24,7 +24,6 @@ import com.gxut.ui.refreshlayout.R;
 public abstract class BaseRefreshLayout extends ViewGroup {
     private boolean mEnablePullDown;// 是否允许下拉刷新
     private boolean mEnablePullUp;// 是否允许上拉加载
-
     private Drawable mPullBgDrawable = null;// 拉动部分背景(color|drawable)
     private onRefreshListener mListener;// 事件监听接口
 
@@ -152,7 +151,7 @@ public abstract class BaseRefreshLayout extends ViewGroup {
     // Layout状态
     private int status = NORMAL;
     // 用于计算滑动距离的Y坐标中介
-    private int mLastYMoved;
+    private int mLastYMoved, mDownYMoved;
     // 用于判断是否拦截触摸事件的Y坐标中介
     private int mLastYIntercept;
 
@@ -166,14 +165,14 @@ public abstract class BaseRefreshLayout extends ViewGroup {
             // Down事件
             case MotionEvent.ACTION_DOWN: {
                 // 记录下本次系列触摸事件的起始点Y坐标
-                mLastYMoved = y;
+                mDownYMoved = mLastYMoved = y;
                 // 不拦截ACTION_DOWN，因为当ACTION_DOWN被拦截，后续所有触摸事件都会被拦截
                 intercept = false;
                 break;
             }
             // Move事件
             case MotionEvent.ACTION_MOVE: {
-                if (y > mLastYIntercept) { // 下滑操作
+                if (y > mLastYIntercept && mEnablePullDown) { // 下滑操作
                     // 获取最顶部的子视图
                     View child = getChildAt(0);
                     if (child instanceof AdapterView) {
@@ -185,7 +184,7 @@ public abstract class BaseRefreshLayout extends ViewGroup {
                     } else if (child instanceof WebView) {
                         intercept = webViewPullDownIntercept(child);
                     }
-                } else if (y < mLastYIntercept) { // 上拉操作
+                } else if (y < mLastYIntercept && mEnablePullUp) { // 上拉操作
                     // 获取最底部的子视图
                     View child = getChildAt(lastChildIndex);
                     if (child instanceof AdapterView) {
@@ -275,7 +274,6 @@ public abstract class BaseRefreshLayout extends ViewGroup {
 
     private boolean rvPullUpIntercept(View child) {
         boolean intercept = false;
-
         RecyclerView recyclerChild = (RecyclerView) child;
         if (recyclerChild.computeVerticalScrollExtent() + recyclerChild.computeVerticalScrollOffset()
                 >= recyclerChild.computeVerticalScrollRange())
@@ -283,6 +281,8 @@ public abstract class BaseRefreshLayout extends ViewGroup {
 
         return intercept;
     }
+
+    private final float effectiveScrollMultiple = 2.3f;
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -292,12 +292,12 @@ public abstract class BaseRefreshLayout extends ViewGroup {
                 // 计算本次滑动的Y轴增量(距离)
                 int dy = mLastYMoved - y;
                 // 如果滑动增量小于0，即下拉操作
-                if (dy < 0) {
-                    if (mEnablePullDown) {
+                if (dy < 0) {//表示往下滑
+                    if (mEnablePullDown || (mDownYMoved - y > 0 && mEnablePullUp)) {
                         // 如果下拉的距离小于mLayoutHeader1/2的高度,则允许滑动
-                        if (getScrollY() > 0 || Math.abs(getScrollY()) <= headerView.getMeasuredHeight() / 2) {
+                        if (getScrollY() > 0 || Math.abs(getScrollY()) <= mEffectiveScroll * effectiveScrollMultiple) {
                             if (status != TRY_LOAD_MORE && status != LOAD_MORE) {
-                                scrollBy(0, dy);
+                                scrollBy(0, dy / 2);
                                 if (status != REFRESH) {
                                     if (getScrollY() <= 0) {
                                         if (status != TRY_REFRESH) {
@@ -310,7 +310,7 @@ public abstract class BaseRefreshLayout extends ViewGroup {
                             } else {
                                 if (getScrollY() > 0) {
                                     dy = dy > 30 ? 30 : dy;
-                                    scrollBy(0, dy);
+                                    scrollBy(0, dy / 2);
                                     if (getScrollY() < mReachBottomScroll + mEffectiveScroll) {
                                         updateStatus(TRY_LOAD_MORE);
                                     }
@@ -319,11 +319,11 @@ public abstract class BaseRefreshLayout extends ViewGroup {
                         }
                     }
                 } else if (dy > 0) {
-                    if (mEnablePullUp) {
-                        if (getScrollY() <= mReachBottomScroll + footView.getMeasuredHeight() / 2) {
+                    if (mEnablePullUp || (mDownYMoved - y < 0 && mEnablePullDown)) {
+                        if (getScrollY() <= mReachBottomScroll + mEffectiveScroll * effectiveScrollMultiple) {
                             // 进行Y轴上的滑动
                             if (status != TRY_REFRESH && status != REFRESH) {
-                                scrollBy(0, dy);
+                                scrollBy(0, dy / 2);
                                 if (status != LOAD_MORE) {
                                     if (getScrollY() >= mReachBottomScroll) {
                                         if (status != TRY_LOAD_MORE)
@@ -336,7 +336,7 @@ public abstract class BaseRefreshLayout extends ViewGroup {
                             } else {
                                 if (getScrollY() <= 0) {
                                     dy = dy > 30 ? 30 : dy;
-                                    scrollBy(0, dy);
+                                    scrollBy(0, dy / 2);
                                     if (Math.abs(getScrollY()) < mEffectiveScroll)
                                         updateStatus(TRY_REFRESH);
                                 }
@@ -511,6 +511,14 @@ public abstract class BaseRefreshLayout extends ViewGroup {
         if (!mEnablePullUp) {
             if (footView != null && footView.isShown())
                 footView.setVisibility(View.GONE);
+        }
+    }
+
+    public void setEnablePullDown(boolean enablePullDown) {
+        this.mEnablePullDown = enablePullDown;
+        if (!this.mEnablePullDown) {
+            if (headerView != null && headerView.isShown())
+                headerView.setVisibility(View.GONE);
         }
     }
 

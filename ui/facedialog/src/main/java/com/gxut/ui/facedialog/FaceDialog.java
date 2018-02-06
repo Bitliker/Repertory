@@ -147,8 +147,6 @@ public class FaceDialog {
             mDialogParamer.animationsStyle = this.animationsStyle;
             mDialogParamer.cancelable = this.cancelable;
             mDialogParamer.canceledOnTouchOutside = this.canceledOnTouchOutside;
-            mDialogParamer.gravity = this.gravity;
-
         }
 
         public FaceDialog show() {
@@ -156,9 +154,7 @@ public class FaceDialog {
                 ListDialog mListDialog = new ListDialog();
                 ListDialogParamer mDialogParamer = new ListDialogParamer();
                 setDialogParamer(mDialogParamer);
-                if (mDialogParamer.gravity == DEF_GRAVITY) {
-                    mDialogParamer.gravity = Gravity.CENTER;
-                }
+                mDialogParamer.gravity = this.gravity == DEF_GRAVITY ? Gravity.BOTTOM : this.gravity;
                 mDialogParamer.onItemSelectListener = this.onItemSelectListener;
                 mDialogParamer.onMultiSelectListener = this.onMultiSelectListener;
                 mDialogParamer.multi = onMultiSelectListener != null;
@@ -171,6 +167,7 @@ public class FaceDialog {
                 PromptDialog promptDialog = new PromptDialog();
                 DialogParamer mDialogParamer = new DialogParamer();
                 setDialogParamer(mDialogParamer);
+                mDialogParamer.gravity = this.gravity == DEF_GRAVITY ? Gravity.CENTER : this.gravity;
                 promptDialog.show(context.getSupportFragmentManager(), title, content,
                         mDialogParamer, this.sureWidgetParamer, this.cancelWidgetParamer);
                 return ceateFaceDialog(promptDialog);
@@ -183,10 +180,6 @@ public class FaceDialog {
             mFaceDialog.mFaceDialogFragment = mFaceDialogFragment;
             return mFaceDialog;
         }
-
-
-
-
 
     }
 

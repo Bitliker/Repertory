@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="titleTextSize">@dimen/textSizeM</dimen>
+    <dimen name="actionbarSize">45dp</dimen>
+
+
+
+    <dimen name="line">1px</dimen>
+
+    <dimen name="textSizeS">10sp</dimen>
+    <dimen name="textSizeM">15sp</dimen>
+    <dimen name="textSizeL">18sp</dimen>
+    <dimen name="textSizeXL">22sp</dimen>
+
+
+    <dimen name="marginS">4dp</dimen>
+    <dimen name="marginM">8dp</dimen>
+    <dimen name="marginL">12dp</dimen>
+    <dimen name="marginXL">16dp</dimen>
+
+
+    <dimen name="itemS">40dp</dimen>
+    <dimen name="itemM">50dp</dimen>
+    <dimen name="itemL">60dp</dimen>
+    <dimen name="itemXL">70dp</dimen>
+</resources>

@@ -4,8 +4,12 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.PopupWindow;
 
+import com.gxut.baseutil.util.DisplayUtil;
 import com.gxut.baseutil.util.ToastUtils;
 import com.gxut.simple.R;
 import com.gxut.simple.model.User;
@@ -34,6 +38,7 @@ public class TestBaseActivity extends BaseActivity implements View.OnClickListen
         findViewById(R.id.progree).setOnClickListener(this);
         findViewById(R.id.prompt).setOnClickListener(this);
         findViewById(R.id.list).setOnClickListener(this);
+        findViewById(R.id.pop).setOnClickListener(this);
     }
 
 
@@ -58,7 +63,6 @@ public class TestBaseActivity extends BaseActivity implements View.OnClickListen
                 .setCancelable(false)
                 .setCanceledOnTouchOutside(false)
                 .setTitle("这个是标题")
-                .setGravity(Gravity.BOTTOM)
                 .setNegative("不取消", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -90,13 +94,8 @@ public class TestBaseActivity extends BaseActivity implements View.OnClickListen
     }
 
 
-
     private void showParamDiaLog() {
-
         new FaceDialog.Builder(this)
-                .setCancelable(false)
-                .setTitle("标题")
-                .setCanceledOnTouchOutside(false)
                 .setContent("这个是内容这个是内容这个是内容这个是内容这个是内容这个是内容")
                 .setPositive(null, new View.OnClickListener() {
                     @Override
@@ -105,12 +104,7 @@ public class TestBaseActivity extends BaseActivity implements View.OnClickListen
                     }
                 })
                 .show();
-//          .setPositive(null, new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.i("gongpengming", "setPositive");
-//            }
-//        })
+
     }
 
     @Override
@@ -125,6 +119,36 @@ public class TestBaseActivity extends BaseActivity implements View.OnClickListen
             case R.id.list:
                 showListDialog();
                 break;
+            case R.id.pop:
+                showPop();
+                break;
+        }
+    }
+
+    private PopupWindow mPopupWindow = null;
+
+    private void showPop() {
+        if (mPopupWindow == null) {
+            mPopupWindow = new PopupWindow(this);
+            View contentView = LayoutInflater.from(ct).inflate(R.layout.pop_change_passwork, null);
+            mPopupWindow.setContentView(contentView);
+            mPopupWindow.setBackgroundDrawable(getDrawable(R.drawable.radian_white_bg));
+            mPopupWindow.setHeight(DisplayUtil.getScreenWidth(this) * 2 / 3);
+            mPopupWindow.setWidth(DisplayUtil.getScreenWidth(this) * 3 / 4);
+            mPopupWindow.setOutsideTouchable(true);
+            mPopupWindow.setTouchable(true);
+            mPopupWindow.setFocusable(true);
+            mPopupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+            mPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                @Override
+                public void onDismiss() {
+                    DisplayUtil.backgroundAlpha(ct, 1f);
+                }
+            });
+        }
+        if (!mPopupWindow.isShowing()) {
+            DisplayUtil.backgroundAlpha(this, 0.4f);
+            mPopupWindow.showAtLocation(mPopupWindow.getContentView(), Gravity.CENTER, 0, 0);
         }
     }
 }

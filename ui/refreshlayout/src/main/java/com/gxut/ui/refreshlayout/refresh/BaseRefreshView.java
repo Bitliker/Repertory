@@ -25,12 +25,10 @@ public abstract class BaseRefreshView extends RelativeLayout {
         super(context);
     }
 
-
     public abstract void startAnim();
 
     public abstract void stopAnim();
 
     public abstract void upStatus(int status);
-
 
 }

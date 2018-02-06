@@ -84,12 +84,16 @@ v1.0.6
 	<dependency>
 		<groupId>com.gxut.ui</groupId>
 		<artifactId>refreshlayout</artifactId>
-		<version>v0.8.0</version>
+		<version>v0.8.1</version>
 		<type>pom</type>
 	</dependency>
 
 ####  gradle引用方式
-	compile 'com.gxut.ui:refreshlayout:v0.8.0'
+	compile 'com.gxut.ui:refreshlayout:v0.8.1'
+
+#### updata
+v0.8.1 :
+> same bug
 
 ----------
 
@@ -129,14 +133,17 @@ v1.0.6
 	<dependency>
 		<groupId>com.gxut.ui</groupId>
 		<artifactId>facedialog</artifactId>
-		<version>v0.9.6</version>
+		<version>v0.9.7</version>
 		<type>pom</type>
 	</dependency>
 
 ####  gradle引用方式
-	compile 'com.gxut.ui:facedialog:v0.9.6'
+	compile 'com.gxut.ui:facedialog:v0.9.7'
 
 ####  update
+v0.9.7
+
+	修复列表弹框出现的数据显示错误和返回不正确的问题
 v0.7.0
 
 	修复列表弹框出现的数据显示错误和返回不正确的问题

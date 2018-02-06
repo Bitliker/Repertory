@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+
+    <color name="colorPrimaryDark">@color/deepBlue</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">@color/deepBlue</color>
+    <color name="textColorPrimary">@color/white</color>
+    <color name="textColor">@color/ash</color>
+    <color name="textColorMain">@color/darkBlack</color>
+    <color name="line">@color/ashWhite</color>
+
+
+    <color name="white">#ffffff</color>
+    <color name="deepBlue">#1E90FF</color>
+    <color name="cuiGreen">#5bbcaf</color>
+    <color name="darkBlack">#3c3c3c</color>
+    <color name="dark">#4e4b4b</color>
+    <color name="ash">#8a8a8a</color>
+    <color name="ashWhite">#ebe9e9</color>
+    <color name="hint">#c9cfd4</color>
+    <color name="hintWhite">#f0f4f7</color>
+
+
+
 </resources>
