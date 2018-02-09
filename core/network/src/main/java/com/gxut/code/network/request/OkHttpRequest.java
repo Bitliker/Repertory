@@ -98,11 +98,11 @@ public class OkHttpRequest extends HttpRequest {
                     public void accept(@NonNull Result result) throws Exception {
                         if (result != null && result.requestOK()) {
                             if (callback != null) {
-                                callback.onSuccess(result.getTags().getRecord(),result.getMessage(),result.getTags());
+                                callback.onSuccess(result.getTags().getRecord(), result.getMessage(), result.getTags());
                             }
                         } else {
                             if (callback != null) {
-                                callback.onFailure(result.getTags().getRecord(),result.getMessage(),result.getTags());
+                                callback.onFailure(result.getTags().getRecord(), result.getMessage(), result.getTags());
                             }
                         }
                     }
@@ -114,10 +114,11 @@ public class OkHttpRequest extends HttpRequest {
         builder.url(parameter.mergeUrl());
         RequestBody body = getBody(parameter);
         if (parameter.getMode() == Parameter.POST_JSON) {
-            builder.post(RequestBody.create(MediaType.parse(parameter.getMediaType()),bodyToString(body)));
+            builder.post(RequestBody.create(MediaType.parse(parameter.getMediaType()), bodyToString(body)));
         } else {
             builder.post(body);
         }
+        Headers2Builder(builder, parameter);
         return okHttpClient.newCall(builder.build()).execute();
     }
 
@@ -155,6 +156,7 @@ public class OkHttpRequest extends HttpRequest {
         }
         builder.addHeader("Content-Type", parameter.getMediaType());
     }
+
     public static String bodyToString(final RequestBody request) {
         try {
             final RequestBody copy = request;

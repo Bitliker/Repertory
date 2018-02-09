@@ -19,6 +19,7 @@ public abstract class RecycleAdapter<T, VH extends RecycleAdapter.ViewHolder> ex
     private Context ct;
     private List<T> models;
     private OnRecyclerItemClickListener onRecyclerClickLister;
+    private OnItemClickListener<T> onItemClickListener;
 
 
     public RecycleAdapter(Context ct, List<T> models) {
@@ -27,14 +28,18 @@ public abstract class RecycleAdapter<T, VH extends RecycleAdapter.ViewHolder> ex
             throw new NullPointerException("ct can`t be null");
         }
         this.models = models;
-        onRecyclerClickLister = new OnRecyclerItemClickListener(ct) {
-            @Override
-            public void onItemTouch(RecyclerView rv, RecyclerView.ViewHolder viewHolder, int position) {
-                T model = getModel(position);
-                onItemClickListener.itemClick(model, position);
-                itemClick(model, position);
-            }
-        };
+        if (onRecyclerClickLister == null) {
+            onRecyclerClickLister = new OnRecyclerItemClickListener(ct) {
+                @Override
+                public void onItemTouch(RecyclerView rv, RecyclerView.ViewHolder viewHolder, int position) {
+                    T model = getModel(position);
+                    itemClick(model, position);
+                    if (RecycleAdapter.this.onItemClickListener != null) {
+                        RecycleAdapter.this.onItemClickListener.itemClick(model, position);
+                    }
+                }
+            };
+        }
     }
 
     public List<T> getModels() {
@@ -43,7 +48,7 @@ public abstract class RecycleAdapter<T, VH extends RecycleAdapter.ViewHolder> ex
 
 
     public T getModel(int position) {
-        return models != null && models.size() > position ? models.get(position) : null;
+        return (models != null && models.size() > position&&position>=0) ? models.get(position) : null;
     }
 
     public void setModels(List<T> models) {
@@ -73,7 +78,7 @@ public abstract class RecycleAdapter<T, VH extends RecycleAdapter.ViewHolder> ex
         return mInflater == null ? mInflater = LayoutInflater.from(ct) : mInflater;
     }
 
-    protected abstract class ViewHolder extends RecyclerView.ViewHolder {
+    public abstract class ViewHolder extends RecyclerView.ViewHolder {
 
         public ViewHolder(ViewGroup mViewGroup, int layoutId) {
             this(getInflater().inflate(layoutId, mViewGroup, false));
@@ -87,7 +92,6 @@ public abstract class RecycleAdapter<T, VH extends RecycleAdapter.ViewHolder> ex
         public abstract void initItemView(View itemView);
     }
 
-    private OnItemClickListener<T> onItemClickListener;
 
     public void setOnItemClickListener(OnItemClickListener<T> onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
@@ -98,7 +102,7 @@ public abstract class RecycleAdapter<T, VH extends RecycleAdapter.ViewHolder> ex
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
-        if (this.onItemClickListener != null) {
+        if (this.onItemClickListener != null && onRecyclerClickLister != null) {
             recyclerView.addOnItemTouchListener(onRecyclerClickLister);
         }
     }
@@ -106,7 +110,7 @@ public abstract class RecycleAdapter<T, VH extends RecycleAdapter.ViewHolder> ex
     @Override
     public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
         super.onDetachedFromRecyclerView(recyclerView);
-        if (this.onItemClickListener != null) {
+        if (this.onItemClickListener != null && onRecyclerClickLister != null) {
             recyclerView.removeOnItemTouchListener(onRecyclerClickLister);
         }
     }

@@ -6,7 +6,7 @@ package com.gxut.ui.commonui.baserecycler.model;
 
 public class SimpleModel<T> {
     private boolean select;
-    private float sort;//用于排序的参数
+    private double sort;//用于排序的参数
     private String name;
     private String sub;
     private String tag;
@@ -30,11 +30,11 @@ public class SimpleModel<T> {
         this.sub = sub;
     }
 
-    public float getSort() {
+    public double getSort() {
         return sort;
     }
 
-    public void setSort(float sort) {
+    public void setSort(double sort) {
         this.sort = sort;
     }
 
